@@ -42,6 +42,12 @@ Bottom level categories:
 
 ## Unreleased
 
+### Changes
+
+#### Naga
+
+- The WGSL backend writes ray queries: `rayQueryInitialize`, `rayQueryProceed`, `rayQueryGenerateIntersection`, `rayQueryConfirmIntersection`, `rayQueryTerminate`, `rayQueryGet{Committed,Candidate}Intersection` and `get{Committed,Candidate}HitVertexPositions`, with `enable wgpu_ray_query;` (and `wgpu_ray_query_vertex_return;` where used) instead of the ray tracing pipeline's extension, which a module whose only ray tracing is ray queries no longer asks for. It no longer writes definitions of the predeclared `RayDesc` and `RayIntersection`, so that what it writes reads back.
+
 ## v30.0.1 (2026-08-21)
 
 ### Bug Fixes
