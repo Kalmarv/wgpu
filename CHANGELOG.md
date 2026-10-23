@@ -47,6 +47,7 @@ Bottom level categories:
 #### Naga
 
 - The WGSL backend writes ray queries: `rayQueryInitialize`, `rayQueryProceed`, `rayQueryGenerateIntersection`, `rayQueryConfirmIntersection`, `rayQueryTerminate`, `rayQueryGet{Committed,Candidate}Intersection` and `get{Committed,Candidate}HitVertexPositions`, with `enable wgpu_ray_query;` (and `wgpu_ray_query_vertex_return;` where used) instead of the ray tracing pipeline's extension, which a module whose only ray tracing is ray queries no longer asks for. It no longer writes definitions of the predeclared `RayDesc` and `RayIntersection`, so that what it writes reads back.
+- `naga::Statement::ImageAtomic` has a new field, `result`: an `Expression::AtomicResult` that receives the texel's previous value, as `Statement::Atomic`'s does. The SPIR-V, HLSL, MSL and GLSL backends write it; the WGSL backend, whose texture atomics return nothing, reports it as unsupported; validation refuses one on a 64-bit image. Front ends set it to `None`.
 
 ## v30.0.1 (2026-08-21)
 
